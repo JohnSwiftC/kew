@@ -4,18 +4,18 @@
 
 #ifndef KEW_SERVICE_H
 #define KEW_SERVICE_H
+#include <string>
 
 
-class Service {
+class service {
 private:
-std::string name;
-std::string repo;
-std::string init_script;
+    std::string name;
+    std::string repo;
+    std::string init_script;
 public:
-
-    Service(std::string name, std::string repo);
-    Service(std::string name, std::string repo, std::string init_script);
-
+    service(std::string name, std::string repo);
+    service(std::string name, std::string repo, std::string init_script);
 };
+
 
 #endif //KEW_SERVICE_H

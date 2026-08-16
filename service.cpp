@@ -4,5 +4,7 @@
 
 #include "service.h"
 
-Service::Service(std::string name, std::string repo): name { std::move(name) }, repo { std::move(repo) } {}
-Service::Service(std::string name, std::string repo, std::string init) : Service(std::move(name), std::move(repo)), init { std::move(init) } {}
+service::service(std::string name, std::string repo): name { std::move(name)}, repo { std::move(repo)}, init_script() {}
+
+service::service(std::string name, std::string repo, std::string init_script): name { std::move(name) }, repo { std::move(repo) }, init_script {std::move(init_script)} {
+}
