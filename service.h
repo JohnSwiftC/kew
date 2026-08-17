@@ -15,8 +15,8 @@ private:
 public:
     service(std::string name, std::string repo);
 
-    [[nodiscard]] bool build_service();
-    [[nodiscard]] bool run_service();
+    [[nodiscard]] bool build_service() const noexcept;
+    [[nodiscard]] bool run_service() const noexcept;
 };
 
 

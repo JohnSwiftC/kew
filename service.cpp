@@ -12,12 +12,12 @@ service::service(std::string name, std::string repo): name { std::move(name)}, r
 //docker build -t myproj ./myproj
 //docker run -d --rm --name job-xyz myproj
 
-bool service::build_service() {
+bool service::build_service() const noexcept {
     const std::string build_str = "docker build -t " + name + " ./" + name;
     return !system(build_str.c_str());
 }
 
-bool service::run_service() {
+bool service::run_service() const noexcept {
     const std::string run_str = "docker run -d --rm --name " + name + " " + name;
     return !system(run_str.c_str());
 }
