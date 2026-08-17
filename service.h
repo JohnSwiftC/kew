@@ -5,16 +5,18 @@
 #ifndef KEW_SERVICE_H
 #define KEW_SERVICE_H
 #include <string>
+#include <vector>
 
 
 class service {
 private:
     std::string name;
     std::string repo;
-    std::string init_script;
 public:
     service(std::string name, std::string repo);
-    service(std::string name, std::string repo, std::string init_script);
+
+    [[nodiscard]] bool build_service();
+    [[nodiscard]] bool run_service();
 };
 
 
