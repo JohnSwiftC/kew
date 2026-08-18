@@ -88,10 +88,12 @@ const char* to_string(const service_state state) noexcept {
     return "UNKNOWN";
 }
 
-service::service(std::string name, std::string repo)
+service::service(std::string name, std::string repo, std::string repo_branch)
     : name_ { std::move(name) },
       repo_ { std::move(repo) },
-      state_ { service_state::UNBUILT } {
+      repo_branch_ { std::move(repo_branch) },
+      state_ { service_state::UNBUILT },
+      repo_state_ { repo_state::NONE } {
     if (repo_.empty()) {
         repo_ = "./" + name_;
     }
@@ -296,6 +298,10 @@ service_result service::refresh_state() {
                                        : state_;
     return commit(std::string("Service '") + name_ + "' is " + to_string(to) + ".",
                   true, to, 0);
+}
+
+bool service::pull_repo() noexcept {
+
 }
 
 

@@ -13,6 +13,11 @@ enum class service_state {
     STOPPED,
 };
 
+enum class repo_state {
+    EXISTS,
+    NONE,
+};
+
 struct service_result {
     std::string message;
     bool success { false };
@@ -24,7 +29,9 @@ class service {
 private:
     std::string name_;
     std::string repo_;
+    std::string repo_branch_;
     service_state state_;
+    repo_state repo_state_;
 
     // Builds a result and commits to_state to this->state_.
     service_result commit(std::string message, bool success, service_state to_state, int exit_code);
@@ -38,7 +45,7 @@ private:
     [[nodiscard]] bool image_exists() const;
 
 public:
-    service(std::string name, std::string repo);
+    service(std::string name, std::string repo, std::string repo_branch);
 
     [[nodiscard]] const std::string& name() const noexcept { return name_; }
     [[nodiscard]] const std::string& repo() const noexcept { return repo_; }
@@ -55,6 +62,8 @@ public:
 
     // Reconciles state_ with what docker actually reports.
     service_result refresh_state();
+
+    [[nodiscord]] bool pull_repo() noexcept;
 };
 
 [[nodiscard]] const char* to_string(service_state state) noexcept;
